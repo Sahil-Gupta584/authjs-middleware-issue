@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
   env: {
     CREATOR_BASE_URL: process.env.CREATOR_BASE_URL,
   },
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client"],
+  },
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      "node:child_process": "child_process",
+    };
+    return config;
+  },
 };
 
 export default nextConfig;
